@@ -279,7 +279,7 @@ function buildInTheWildCarousel() {
         return btn;
     });
 
-    function select(i) {
+    function select(i, smooth = true) {
         current = (i + OBJECTS.length) % OBJECTS.length;
         const obj = OBJECTS[current];
         video.src = itwUrl(obj);
@@ -293,13 +293,17 @@ function buildInTheWildCarousel() {
             t.classList.toggle('is-active', on);
             t.setAttribute('aria-selected', on ? 'true' : 'false');
         });
-        thumbs[current].scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+        const t = thumbs[current];
+        const t_rect = t.getBoundingClientRect();
+        const s_rect = strip.getBoundingClientRect();
+        const delta = (t_rect.left + t_rect.width / 2) - (s_rect.left + s_rect.width / 2);
+        strip.scrollTo({ left: strip.scrollLeft + delta, behavior: smooth ? 'smooth' : 'auto' });
     }
 
     gallery.querySelector('.itw-prev').addEventListener('click', () => select(current - 1));
     gallery.querySelector('.itw-next').addEventListener('click', () => select(current + 1));
     const start = OBJECTS.indexOf('spray_bottle');
-    select(start === -1 ? 0 : start);
+    select(start === -1 ? 0 : start, false);
 }
 
 $(document).ready(function() {

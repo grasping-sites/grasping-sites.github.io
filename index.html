@@ -5,21 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Primary Meta Tags -->
-  <!-- ANONYMIZED for double-blind review -->
+  <!-- Social / SEO meta -->
   <meta name="title" content="HUG: Human Universal Grasping">
-  <meta name="description" content="Learning dexterous robot grasping entirely from human grasps. Anonymous submission under double-blind review.">
+  <meta name="description" content="Learning dexterous multifingered grasping entirely from human data.">
   <meta name="keywords" content="learning from humans, dexterous grasping, robotics, flow matching, egocentric data">
-  <meta name="author" content="Anonymous Authors">
+  <meta name="author" content="Kevin Yuanbo Wu, Tianxing Zhou, Isaac Tu, Billy Yan, Irmak Guzey, David Fouhey, Dandan Shan, Lerrel Pinto">
   <meta name="robots" content="index, follow">
   <meta name="language" content="English">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="article">
-  <meta property="og:site_name" content="Anonymous">
+  <meta property="og:site_name" content="grasping.io">
   <meta property="og:title" content="HUG: Human Universal Grasping">
-  <meta property="og:description" content="Learning dexterous robot grasping entirely from human grasps. Anonymous submission under double-blind review.">
-  <meta property="og:url" content="https://hug-robot.github.io">
-  <meta property="og:image" content="https://hug-robot.github.io/static/images/social_preview.png">
+  <meta property="og:description" content="Learning dexterous multifingered grasping entirely from human data.">
+  <meta property="og:url" content="https://grasping.io">
+  <meta property="og:image" content="https://grasping.io/static/images/social_preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="HUG: Human Universal Grasping - Research Preview">
@@ -28,15 +28,21 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="HUG: Human Universal Grasping">
-  <meta name="twitter:description" content="Learning dexterous robot grasping entirely from human grasps. Anonymous submission under double-blind review.">
-  <meta name="twitter:image" content="https://hug-robot.github.io/static/images/social_preview.png">
+  <meta name="twitter:description" content="Learning dexterous multifingered grasping entirely from human data.">
+  <meta name="twitter:image" content="https://grasping.io/static/images/social_preview.png">
   <meta name="twitter:image:alt" content="HUG: Human Universal Grasping - Research Preview">
 
   <!-- Academic/Research Specific -->
-  <meta name="citation_title" content="Human Universal Grasping">
-  <meta name="citation_author" content="Anonymous">
-  <meta name="citation_conference_title" content="Anonymous Venue">
-  <meta name="citation_pdf_url" content="https://hug-robot.github.io/static/pdfs/paper.pdf">
+  <meta name="citation_title" content="HUG: Human Universal Grasping">
+  <meta name="citation_author" content="Wu, Kevin Yuanbo">
+  <meta name="citation_author" content="Zhou, Tianxing">
+  <meta name="citation_author" content="Tu, Isaac">
+  <meta name="citation_author" content="Yan, Billy">
+  <meta name="citation_author" content="Guzey, Irmak">
+  <meta name="citation_author" content="Fouhey, David">
+  <meta name="citation_author" content="Shan, Dandan">
+  <meta name="citation_author" content="Pinto, Lerrel">
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2606.17054">
 
   <!-- Additional SEO -->
   <meta name="theme-color" content="#6d28d9">
@@ -55,7 +61,7 @@
 
   <!-- Critical CSS - Load synchronously -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/index.css?v=73">
+  <link rel="stylesheet" href="static/css/index.css?v=77">
 
   <!-- Non-critical CSS - Load asynchronously -->
   <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -79,27 +85,31 @@
   <script defer src="static/js/fontawesome.all.min.js"></script>
   <script defer src="static/js/bulma-carousel.min.js"></script>
   <script defer src="static/js/bulma-slider.min.js"></script>
-  <script defer src="static/js/index.js?v=10"></script>
+  <script defer src="static/js/index.js?v=11"></script>
 
-  <!-- Structured Data for Academic Papers (anonymized) -->
+  <!-- Structured Data for Academic Papers -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "ScholarlyArticle",
-    "headline": "Human Universal Grasping",
-    "description": "Learning dexterous robot grasping entirely from human grasps. Anonymous submission currently under double-blind review.",
+    "headline": "HUG: Human Universal Grasping",
+    "description": "Learning dexterous multifingered grasping entirely from human data.",
     "author": [
-      {
-        "@type": "Person",
-        "name": "Anonymous"
-      }
+      { "@type": "Person", "name": "Kevin Yuanbo Wu" },
+      { "@type": "Person", "name": "Tianxing Zhou" },
+      { "@type": "Person", "name": "Isaac Tu" },
+      { "@type": "Person", "name": "Billy Yan" },
+      { "@type": "Person", "name": "Irmak Guzey" },
+      { "@type": "Person", "name": "David Fouhey" },
+      { "@type": "Person", "name": "Dandan Shan" },
+      { "@type": "Person", "name": "Lerrel Pinto" }
     ],
     "publisher": {
       "@type": "Organization",
-      "name": "Anonymous Venue"
+      "name": "arXiv"
     },
-    "url": "https://hug-robot.github.io",
-    "image": "https://hug-robot.github.io/static/images/social_preview.png",
+    "url": "https://grasping.io",
+    "image": "https://grasping.io/static/images/social_preview.png",
     "keywords": ["learning from humans", "dexterous grasping", "robotics", "flow matching"],
     "isAccessibleForFree": true,
     "license": "https://creativecommons.org/licenses/by/4.0/"
@@ -309,7 +319,7 @@
 <!-- Approach -->
 <section class="section" id="method">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered"><span class="sc">HUG Model</span> Architecture</h2>
+    <h2 class="title is-3 has-text-centered"><span class="sc">HUG</span> Model Architecture</h2>
     <div class="publication-links section-links">
       <a href="https://github.com/KevinyWu/hug" class="hug-btn" target="_blank" rel="noopener">
         <i class="fab fa-github"></i> Code
@@ -354,27 +364,27 @@
           <tbody>
             <tr>
               <th>Small</th>
-              <td><a href="https://a.co/d/07mKzY1y" target="_blank" rel="noopener">Glue Stick</a><a href="https://a.co/d/0bxApwD5" target="_blank" rel="noopener">Pepper Shaker</a></td>
-              <td><a href="https://a.co/d/0aOPAcgj" target="_blank" rel="noopener">Strawberry</a><a href="https://a.co/d/0a8SsmAr" target="_blank" rel="noopener">Hacky Sack</a></td>
-              <td><a href="https://a.co/d/04zLxVfZ" target="_blank" rel="noopener">Eraser</a><a href="https://a.co/d/0fAuGEUO" target="_blank" rel="noopener">Match Box</a></td>
-              <td><a href="https://a.co/d/03tqtg4a" target="_blank" rel="noopener">Nail Clipper</a><a href="https://a.co/d/03m95t6o" target="_blank" rel="noopener">Lock</a></td>
-              <td><a href="https://a.co/d/0d14g4g6" target="_blank" rel="noopener">Rubber Duck</a><a href="https://a.co/d/00JjAvQC" target="_blank" rel="noopener">Tape Measure</a></td>
+              <td data-label="Cylindrical"><a href="https://a.co/d/07mKzY1y" target="_blank" rel="noopener">Glue Stick</a><a href="https://a.co/d/0bxApwD5" target="_blank" rel="noopener">Pepper Shaker</a></td>
+              <td data-label="Spheroidal"><a href="https://a.co/d/0aOPAcgj" target="_blank" rel="noopener">Strawberry</a><a href="https://a.co/d/0a8SsmAr" target="_blank" rel="noopener">Hacky Sack</a></td>
+              <td data-label="Prismatic"><a href="https://a.co/d/04zLxVfZ" target="_blank" rel="noopener">Eraser</a><a href="https://a.co/d/0fAuGEUO" target="_blank" rel="noopener">Match Box</a></td>
+              <td data-label="Appendaged"><a href="https://a.co/d/03tqtg4a" target="_blank" rel="noopener">Nail Clipper</a><a href="https://a.co/d/03m95t6o" target="_blank" rel="noopener">Lock</a></td>
+              <td data-label="Amorphous"><a href="https://a.co/d/0d14g4g6" target="_blank" rel="noopener">Rubber Duck</a><a href="https://a.co/d/00JjAvQC" target="_blank" rel="noopener">Tape Measure</a></td>
             </tr>
             <tr>
               <th>Medium</th>
-              <td><a href="https://a.co/d/0cPeV9XK" target="_blank" rel="noopener">Umbrella</a><a href="https://a.co/d/060jL3ll" target="_blank" rel="noopener">Bowl</a></td>
-              <td><a href="https://a.co/d/0aOPAcgj" target="_blank" rel="noopener">Pear</a><a href="https://a.co/d/0dOPQLPh" target="_blank" rel="noopener">Softball</a></td>
-              <td><a href="https://a.co/d/05ZzLwNh" target="_blank" rel="noopener">Card Deck</a><a href="https://a.co/d/0cEA6sDz" target="_blank" rel="noopener">Sponge</a></td>
-              <td><a href="https://a.co/d/0gXil3u7" target="_blank" rel="noopener">Dustpan</a><a href="https://a.co/d/008PxSPm" target="_blank" rel="noopener">Handbell</a></td>
-              <td><a href="https://a.co/d/0f05KJqJ" target="_blank" rel="noopener">Tape Dispenser</a><a href="https://a.co/d/0aOPAcgj" target="_blank" rel="noopener">Grapes</a></td>
+              <td data-label="Cylindrical"><a href="https://a.co/d/0cPeV9XK" target="_blank" rel="noopener">Umbrella</a><a href="https://a.co/d/060jL3ll" target="_blank" rel="noopener">Bowl</a></td>
+              <td data-label="Spheroidal"><a href="https://a.co/d/0aOPAcgj" target="_blank" rel="noopener">Pear</a><a href="https://a.co/d/0dOPQLPh" target="_blank" rel="noopener">Softball</a></td>
+              <td data-label="Prismatic"><a href="https://a.co/d/05ZzLwNh" target="_blank" rel="noopener">Card Deck</a><a href="https://a.co/d/0cEA6sDz" target="_blank" rel="noopener">Sponge</a></td>
+              <td data-label="Appendaged"><a href="https://a.co/d/0gXil3u7" target="_blank" rel="noopener">Dustpan</a><a href="https://a.co/d/008PxSPm" target="_blank" rel="noopener">Handbell</a></td>
+              <td data-label="Amorphous"><a href="https://a.co/d/0f05KJqJ" target="_blank" rel="noopener">Tape Dispenser</a><a href="https://a.co/d/0aOPAcgj" target="_blank" rel="noopener">Grapes</a></td>
             </tr>
             <tr>
               <th>Large</th>
-              <td><a href="https://a.co/d/07xQGmJS" target="_blank" rel="noopener">Spray Bottle</a><a href="https://a.co/d/04oYoSC7" target="_blank" rel="noopener">Wine Bottle</a></td>
-              <td><a href="https://a.co/d/0aOPAcgj" target="_blank" rel="noopener">Pineapple</a><a href="https://a.co/d/0aE62Rc8" target="_blank" rel="noopener">Football</a></td>
-              <td><a href="https://a.co/d/06K1zaQT" target="_blank" rel="noopener">Wipe Dispenser</a><a href="https://a.co/d/0dmLPUvX" target="_blank" rel="noopener">Storage Bin</a></td>
-              <td><a href="https://a.co/d/020FTZeH" target="_blank" rel="noopener">Saucepan</a><a href="https://a.co/d/01HRHJtm" target="_blank" rel="noopener">Picnic Basket</a></td>
-              <td><a href="https://a.co/d/02qiVce3" target="_blank" rel="noopener">Headphones</a><a href="https://a.co/d/0dx8hTxI" target="_blank" rel="noopener">Easel</a></td>
+              <td data-label="Cylindrical"><a href="https://a.co/d/07xQGmJS" target="_blank" rel="noopener">Spray Bottle</a><a href="https://a.co/d/04oYoSC7" target="_blank" rel="noopener">Wine Bottle</a></td>
+              <td data-label="Spheroidal"><a href="https://a.co/d/0aOPAcgj" target="_blank" rel="noopener">Pineapple</a><a href="https://a.co/d/0aE62Rc8" target="_blank" rel="noopener">Football</a></td>
+              <td data-label="Prismatic"><a href="https://a.co/d/06K1zaQT" target="_blank" rel="noopener">Wipe Dispenser</a><a href="https://a.co/d/0dmLPUvX" target="_blank" rel="noopener">Storage Bin</a></td>
+              <td data-label="Appendaged"><a href="https://a.co/d/020FTZeH" target="_blank" rel="noopener">Saucepan</a><a href="https://a.co/d/01HRHJtm" target="_blank" rel="noopener">Picnic Basket</a></td>
+              <td data-label="Amorphous"><a href="https://a.co/d/02qiVce3" target="_blank" rel="noopener">Headphones</a><a href="https://a.co/d/0dx8hTxI" target="_blank" rel="noopener">Easel</a></td>
             </tr>
           </tbody>
         </table>
@@ -400,9 +410,14 @@
     <p class="eval-intro">
       Pick a <span class="sc">HUG-Bench</span> test object to compare methods side by side. Each clip plays 10 rollouts consecutively (autonomous, 4x). Success is counted as lifting the object off the table. Overall success rate: <b>HUG</b> 66.7% &middot; <b>Dex1B</b> 43.7% &middot; <b>CAP</b> 32.7%
     </p>
-    <div class="object-table-wrap">
-      <div id="object-grid" class="object-table" role="tablist" aria-label="Select benchmark object by geometry and size"></div>
+    <div class="object-selector">
+      <button class="obj-nav obj-prev" type="button" aria-label="Previous object"><i class="fas fa-chevron-left"></i></button>
+      <div class="object-table-wrap">
+        <div id="object-grid" class="object-table" role="tablist" aria-label="Select benchmark object by geometry and size"></div>
+      </div>
+      <button class="obj-nav obj-next" type="button" aria-label="Next object"><i class="fas fa-chevron-right"></i></button>
     </div>
+    <p id="object-caption" class="object-caption"></p>
     <div id="object-videos">
       <div class="method-row">
         <div class="method-meta">

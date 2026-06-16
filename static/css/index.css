@@ -459,6 +459,35 @@ body {
   border-radius: var(--border-radius);
 }
 
+/* Object selector: grid on desktop, horizontal carousel on phones (<=600px).
+   Desktop needs no rule (plain block, arrows hidden); see the <=600px media query. */
+/* prev/next arrows: hidden on desktop, shown in the phone carousel */
+.obj-nav {
+  display: none;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent-tint);
+  color: var(--primary-color);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.obj-nav:hover { background: var(--primary-color); color: #fff; }
+/* selected-object name: hidden on desktop (grid shows names per thumb), shown on phones */
+.object-caption {
+  display: none;
+  text-align: center;
+  margin: 0.25rem 0 0.85rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
 /* Object table: rows = size (S/M/L), columns = geometry (2 objects each) */
 .object-table-wrap {
   overflow-x: auto;
@@ -618,6 +647,44 @@ body {
     flex-direction: column;
     align-items: stretch;
   }
+
+  /* object grid -> horizontal swipeable carousel (like the in-the-wild strip) */
+  .object-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .obj-nav { display: flex; }
+
+  .object-table-wrap {
+    flex: 1 1 auto;
+    min-width: 0;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+  }
+  .object-table {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    width: max-content;
+    grid-template-columns: none;
+  }
+  /* grid scaffolding makes no sense in a 1-row strip */
+  .ot-corner, .ot-geo, .ot-size { display: none; }
+
+  .object-thumb {
+    flex: 0 0 auto;
+    width: 56px;
+    height: 56px;
+    aspect-ratio: auto;
+    padding: 4px;
+    scroll-snap-align: center;
+  }
+  .object-thumb span { display: none; }
+  .object-thumb img { flex: none; width: 100%; height: 100%; }
+  .object-thumb.is-active { width: 72px; height: 72px; }
+
+  .object-caption { display: block; }
 }
 
 /* Pagination and Misc Improvements */
@@ -1270,6 +1337,7 @@ section.hero:first-of-type {
 .bench-shop-table {
   display: none;
   flex-basis: 100%;
+  min-width: 0;          /* allow this flex item to shrink so overflow-x can scroll */
   margin-top: 0.85rem;
   overflow-x: auto;
 }
@@ -1310,6 +1378,49 @@ section.hero:first-of-type {
 .bench-shop-table td a:hover {
   color: var(--primary-hover);
   border-bottom-color: var(--primary-hover);
+}
+
+/* Phones: stack the buy-objects table into cards (one per size) so nothing overflows */
+@media (max-width: 700px) {
+  .bench-shop-table { overflow-x: visible; }
+  .bench-shop-table table,
+  .bench-shop-table tbody,
+  .bench-shop-table tr,
+  .bench-shop-table th,
+  .bench-shop-table td { display: block; width: auto; }
+  .bench-shop-table thead { display: none; }   /* geometry shown per-cell via data-label */
+  .bench-shop-table tr {
+    margin-bottom: 0.85rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+  }
+  .bench-shop-table tbody th {
+    text-align: center;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .bench-shop-table td {
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .bench-shop-table tr td:last-child { border-bottom: none; }
+  .bench-shop-table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 0.2rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--text-light);
+  }
+  .bench-shop-table td a {
+    display: inline-block;
+    width: auto;
+    margin: 0 0.9rem 0.1rem 0;
+  }
+  .bench-shop-table td a + a { margin-top: 0; }
 }
 
 /* Full-width figure blocks */

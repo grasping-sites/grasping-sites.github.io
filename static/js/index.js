@@ -184,10 +184,31 @@ const labUrl = (method, obj) => USE_LOCAL ? `${LOCAL}/${method}/${obj}.mp4` : `$
 const itwUrl = obj => USE_LOCAL ? `${LOCAL}/hug_wild/${obj}.mp4` : `${REL}/itw_${obj}.mp4`;
 const thumbUrl = obj => `static/images/object_thumbnails/${obj}.png`;
 
+// center the active thumb in the horizontal scroller (mobile carousel; no-op on desktop grid)
+function centerActiveThumb() {
+    const wrap = document.querySelector('.object-table-wrap');
+    const act = document.querySelector('.object-thumb.is-active');
+    if (!wrap || !act) return;
+    const a = act.getBoundingClientRect(), w = wrap.getBoundingClientRect();
+    const delta = (a.left + a.width / 2) - (w.left + w.width / 2);
+    wrap.scrollTo({ left: wrap.scrollLeft + delta, behavior: 'smooth' });
+}
+
+// prev/next stepping for the mobile carousel; DOM order == strip order, wraps around
+function navObject(dir) {
+    const t = [...document.querySelectorAll('.object-thumb')];
+    const i = t.findIndex(b => b.classList.contains('is-active'));
+    if (i < 0) return;
+    t[(i + dir + t.length) % t.length].click();
+}
+
 function selectObject(obj, btn) {
     document.querySelectorAll('.object-thumb.is-active')
         .forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-selected', 'false'); });
     if (btn) { btn.classList.add('is-active'); btn.setAttribute('aria-selected', 'true'); }
+    const cap = document.getElementById('object-caption');  // mobile carousel label
+    if (cap) cap.textContent = pretty(obj);
+    centerActiveThumb();
     const sc = SCORES[obj] || {};
     LAB_METHODS.forEach(([method, id]) => {
         const v = document.getElementById(id);
@@ -326,6 +347,8 @@ $(document).ready(function() {
 	// Build eval gallery before attaching carousels so slides exist
     buildObjectTable();
     buildInTheWildCarousel();
+    document.querySelector('.obj-prev')?.addEventListener('click', () => navObject(-1));
+    document.querySelector('.obj-next')?.addEventListener('click', () => navObject(1));
 
 	// Initialize any remaining carousels not handled above
     var carousels = bulmaCarousel.attach('.carousel:not(#itw-carousel)', options);

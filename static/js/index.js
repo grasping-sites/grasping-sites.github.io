@@ -122,7 +122,12 @@ function setupVideoCarouselAutoplay() {
 // ---- Eval-video gallery (data-driven) ----
 // Videos hosted as GitHub Release assets (off the Pages cap). Flat asset names:
 // <method>_<object>.mp4 with method in {cap, dex1b, hug, itw}.
-const REL = "https://github.com/hug-robot/hug-robot.github.io/releases/download/videos-v1";
+const REL = "https://github.com/grasping-sites/grasping-sites.github.io/releases/download/videos-v1";
+// Local preview: serve optimized clips from static/videos (symlink -> videos/eval/final).
+// Layout: <method>/<object>.mp4 for lab, hug_wild/<object>.mp4 for in-the-wild.
+// Flip to false to use the GitHub Release assets (flat <method>_<object>.mp4 names).
+const USE_LOCAL = false;
+const LOCAL = "static/videos";
 const OBJECTS = [
     "bowl", "card_deck", "dustpan", "easel", "eraser", "football", "glue_stick",
     "grapes", "hacky_sack", "handbell", "headphones", "lock", "match_box",
@@ -175,8 +180,8 @@ const ITW_SR = {
     rubber_duck: 9, tape_measure: 5, tape_dispenser: 4, grapes: 3, headphones: 2, easel: 7,
 };
 const pretty = o => o.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
-const labUrl = (method, obj) => `${REL}/${method}_${obj}.mp4`;
-const itwUrl = obj => `${REL}/itw_${obj}.mp4`;
+const labUrl = (method, obj) => USE_LOCAL ? `${LOCAL}/${method}/${obj}.mp4` : `${REL}/${method}_${obj}.mp4`;
+const itwUrl = obj => USE_LOCAL ? `${LOCAL}/hug_wild/${obj}.mp4` : `${REL}/itw_${obj}.mp4`;
 const thumbUrl = obj => `static/images/object_thumbnails/${obj}.png`;
 
 function selectObject(obj, btn) {
@@ -188,7 +193,9 @@ function selectObject(obj, btn) {
         const v = document.getElementById(id);
         if (v) {
             v.muted = true;  // Safari checks the property (not attr) for muted autoplay
-            v.src = labUrl(method, obj);
+            // typed <source> (not bare src): release assets serve as octet-stream+nosniff,
+            // which Safari refuses to play without an explicit MIME hint
+            v.innerHTML = `<source src="${labUrl(method, obj)}" type="video/mp4">`;
             v.load();
             const play = () => v.play().catch(() => {});
             play();
@@ -240,7 +247,7 @@ function buildObjectTable() {
         grid.appendChild(h);
     });
     // one row per size
-    const DEFAULT_OBJ = "spray_bottle";
+    const DEFAULT_OBJ = "storage_bin";
     let fallback = null;
     SIZES.forEach(([sz, szFull]) => {
         const lbl = document.createElement('div');
@@ -252,7 +259,7 @@ function buildObjectTable() {
             const btn = makeThumb(obj);
             grid.appendChild(btn);
             if (!fallback) fallback = btn;
-            if (obj === DEFAULT_OBJ) selectObject(obj, btn);  // default-select spray bottle
+            if (obj === DEFAULT_OBJ) selectObject(obj, btn);  // default-select storage bin
         }));
     });
     if (!document.querySelector('.object-thumb.is-active') && fallback) fallback.click();
@@ -282,7 +289,7 @@ function buildInTheWildCarousel() {
     function select(i, smooth = true) {
         current = (i + OBJECTS.length) % OBJECTS.length;
         const obj = OBJECTS[current];
-        video.src = itwUrl(obj);
+        video.innerHTML = `<source src="${itwUrl(obj)}" type="video/mp4">`;
         video.load();
         video.play().catch(() => {});
         const sr = ITW_SR[obj];
@@ -302,7 +309,7 @@ function buildInTheWildCarousel() {
 
     gallery.querySelector('.itw-prev').addEventListener('click', () => select(current - 1));
     gallery.querySelector('.itw-next').addEventListener('click', () => select(current + 1));
-    const start = OBJECTS.indexOf('spray_bottle');
+    const start = OBJECTS.indexOf('match_box');
     select(start === -1 ? 0 : start, false);
 }
 

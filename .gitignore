@@ -1,2 +1,6 @@
 .DS_Store
 .claude/
+
+# local video symlink, use GitHub Release assets in prod
+static/videos
+static/teaser_web.mp4

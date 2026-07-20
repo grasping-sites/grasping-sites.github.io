@@ -268,7 +268,7 @@ function buildObjectTable() {
         grid.appendChild(h);
     });
     // one row per size
-    const DEFAULT_OBJ = "storage_bin";
+    const DEFAULT_OBJ = "picnic_basket";
     let fallback = null;
     SIZES.forEach(([sz, szFull]) => {
         const lbl = document.createElement('div');
@@ -280,7 +280,7 @@ function buildObjectTable() {
             const btn = makeThumb(obj);
             grid.appendChild(btn);
             if (!fallback) fallback = btn;
-            if (obj === DEFAULT_OBJ) selectObject(obj, btn);  // default-select storage bin
+            if (obj === DEFAULT_OBJ) selectObject(obj, btn);  // default-select picnic basket
         }));
     });
     if (!document.querySelector('.object-thumb.is-active') && fallback) fallback.click();
